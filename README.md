@@ -1,4 +1,8 @@
 t3Alg
 =====
 
-Esto no se acaba, tarea 3 de algoritmos :P
+Inputs:
+   Arreglos de tamaño 1.000.000
+   Rango de valores O(n)
+   
+   Consideradar el uso de memoria (estaticamente)
