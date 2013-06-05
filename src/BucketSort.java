@@ -1,40 +1,58 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 
-public class BucketSort implements SortInterface {
+public class BucketSort {
 	/*BucketSort para numeros enteros, y asumiendo que hay infinito espacio disponible*/
 	
-    public void sort(int[] a, int maxVal){
-        int [] bucket=new int[maxVal+1];
+    public static Object[] sort(int[] a, int maxVal){
+    	
+    	List<Integer>[] buckets = new ArrayList[a.length];
+    	
 
+    	for(List<Integer> bucket :buckets){
+    		bucket = new ArrayList<Integer>();
+    	}
+        /*
         for (int i=0; i<bucket.length; i++){
             bucket[i]=0;
         }
+        */
 
         for (int i=0; i<a.length; i++){
-            bucket[a[i]]++;
+        	int pos = (int)Math.floor(((double)a[i]/maxVal)*a.length);
+            buckets[pos].add(a[i]);
         }
-
-
-        int outPos=0;
-        for (int i=0; i<bucket.length; i++){
-            for (int j=0; j<bucket[i]; j++){
-                a[outPos++]=i;
-            }
+        
+        for(List<Integer> bucket:buckets){
+        	Collections.sort(bucket);
         }
+        
+        for(int i=1;i<a.length;i++){
+        	buckets[0].addAll(buckets[i]);
+        }
+        
+        return buckets[0].toArray();
+        
     }
 
-    /*
+
+
+    
     public static void main(String[] args){
-        int maxVal=3;
-        int [] data= {1,0,1,2,3,1,0,3,1,0,1,3}; //ArrayUtil.randomIntArray(10,maxVal+1);
+        int i;
+    	int maxVal=100;
+        int[] arr = new int[10];
+        for(i=0;i<arr.length;i++){
+            arr[i] = (int)(Math.random() * 100);
+        }
+        Object[] result = sort(arr,maxVal);
 
-        System.out.println(Arrays.toString(data));
-
-        sort(data,maxVal);
-
-        System.out.println(Arrays.toString(data));
+        System.out.println(Arrays.toString(result));
 
     }
-    */
+   
 }
