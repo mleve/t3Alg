@@ -2,11 +2,11 @@ import java.util.Arrays;
 import java.util.Random;
 
 
-public class CountingSort implements SortInterface{
+public class CountingSort{
 
 	
 	
-	public void sort(int[] a, int high) 
+	public static void sort(int[] a, int high) 
 	{
 	    int[] counts = new int[high + 1]; // this will hold all possible values, from low to high
 	    for (int x : a)
@@ -22,16 +22,16 @@ public class CountingSort implements SortInterface{
 	/*
     public static void main(String[] args){
         int i;
-        int[] arr = new int[15];
+        int[] arr = new int[100000];
         System.out.print("original: ");
         for(i=0;i<arr.length;i++){
-            arr[i] = (int)(Math.random() * 1024);
-            System.out.print(arr[i] + " ");
+            arr[i] = (int)(Math.random() * 1000000);
+            //System.out.print(arr[i] + " ");
         }
-        sort(arr,1024);
+        sort(arr,1000000);
         System.out.print("\nsorted: ");
         for(i=0;i<arr.length;i++)
-            System.out.print(arr[i] + " ");
+            //System.out.print(arr[i] + " ");
         System.out.println("\nDone ;-)");
     }
     */

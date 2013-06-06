@@ -1,51 +1,50 @@
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
 
 public class RadixSort{
 
-	public static void sort(int[] v) {
-        int max    = 1;     // cantidad de repeticiones
-        int nbytes = 4;     // numero de bytes a desplazar
-        int nColas = (int) Math.pow(2,nbytes) ;
-        // Creación e inicialización del arreglo de colas
-        Queue<Integer>[] cola = new LinkedList[nColas];
-        for(int i=0; i<nColas; i++) cola[i]=new LinkedList<Integer>();
- 
-        int     div     = 0;        // posición a comparar
-        for(int i=0; i<max; i++) {
-            // parte 1: recorrer el vector  para guardar cada elemento
-            // en la cola correspondiente
-            for(int numero: v) {
-                // buscar el mayor número del vector
-                if(i==0) if(numero>max) max=numero;
-                // calcular en qué cola debe ir cada número
-                int numCola = (numero>>div) & 0xf;
-                cola[numCola].add(numero);
-            }
-            div = div+nbytes;
- 
-            // parte 2: recorrer las colas en orden para poner cada
-            // elemento en el vector;
-            int j=0;
-            for(Queue<Integer> c: cola) {
-                while(!c.isEmpty()) v[j++]=c.remove();
-            }
-            // la primera vez se actualiza el número de veces que se
-            // debe ejecutar el proceso
-            if(i==0) { max = (int) (Math.log(max)/Math.log(nColas)) + 1; 
-            }
-        }
-        
+	public static void sort(int[] v,int high) {
+		int d = (""+high).length();
+		int decPos=10;
+		for(int i=0;i<d;i++){
+			countingDigitSort(v,decPos);
+			decPos=decPos*10;
+		}
 	 }
+	
+	private static void countingDigitSort(int[] a, int decPos) 
+	{
+	    int[][] counts = new int[10][a.length]; // this will hold all possible values, from low to high
+	    int[] indexs = new int[10];
+	    Arrays.fill(indexs, 0);
+	    for (int x : a){
+	    	int pos= x%decPos;
+	    	if(pos>9)
+	    		pos=10*pos/decPos;
+	    	
+	        counts[pos][indexs[pos]]=x; // - low so the lowest possible value is always 0
+	        indexs[pos]++;
+	    }
+	    int current =0;
+	    for (int i = 0; i < counts.length; i++)
+	    {
+	    	for(int j=0;j<indexs[i];j++){
+	    		a[current]=counts[i][j];
+	    		current++;
+	    	}
+	    }
+	}
  
     public static void main(String[] args){
         int i;
-        int[] arr = new int[1000000];
+        int[] arr = new int[1000];
         for(i=0;i<arr.length;i++){
-            arr[i] = (int)(Math.random() * 100000);
+            arr[i] = 1000+(int)(Math.random() * 9000);
+          
         }
-        sort(arr);
+        sort(arr, 9999);
         System.out.println("\nDone ;-)");
     }
 	
