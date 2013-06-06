@@ -13,17 +13,17 @@ public class Tarea3 {
 		return aux;
 		
 	}
-	
+	/*
 	public static void main(String[] args){
 		int maxVal= 1000000;
 		int [][] input = inputGenerator(maxVal,10,1000000);
 		
-		SortInterface sort = new CountingSort();
+		//SortInterface sort = new CountingSort();
 		
 		for(int i=0;i<10;i++){
 			sort.sort(input[i], maxVal);
 		}
 		System.out.println("hola");
 	}
-	
+	*/
 }

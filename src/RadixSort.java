@@ -39,12 +39,12 @@ public class RadixSort{
  
     public static void main(String[] args){
         int i;
-        int[] arr = new int[1000];
+        int[] arr = new int[10000];
         for(i=0;i<arr.length;i++){
-            arr[i] = 1000+(int)(Math.random() * 9000);
+            arr[i] = 100000+(int)(Math.random() * 900000);
           
         }
-        sort(arr, 9999);
+        sort(arr, 999999);
         System.out.println("\nDone ;-)");
     }
 	

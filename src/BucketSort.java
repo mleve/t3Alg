@@ -8,35 +8,59 @@ import java.util.List;
 public class BucketSort {
 	/*BucketSort para numeros enteros, y asumiendo que hay infinito espacio disponible*/
 	
-    public static Object[] sort(int[] a, int maxVal){
+    public static void sort(int[] a, int maxVal){
     	
-    	List<Integer>[] buckets = new ArrayList[a.length];
-    	
-
-    	for(List<Integer> bucket :buckets){
-    		bucket = new ArrayList<Integer>();
-    	}
-        /*
-        for (int i=0; i<bucket.length; i++){
-            bucket[i]=0;
-        }
-        */
+	    int[][] buckets = new int[a.length][a.length]; // this will hold all possible values, from low to highyL
+	    
+	    ArrayList<Integer>[] newBuckets = new ArrayList[a.length];
+	    /*
+	    for(ArrayList<Integer> bucket :newBuckets){
+	    	bucket = new ArrayList<Integer>();
+	    }
+	    */
+	    for(int i=0;i<a.length;i++){
+	    	newBuckets[i] = new ArrayList<Integer>();
+	    }
+	    
+	    for(int val:a){
+	    	int pos = (int)Math.floor(((double)val/maxVal)*a.length);
+	    	newBuckets[pos].add(val);
+	    }
+	    for(ArrayList<Integer>bucket:newBuckets){
+	    	Collections.sort(bucket);
+	    }
+	    
+	    int aIndex=0;
+	    for(int i=0;i<newBuckets.length;i++){
+	    	for(int j=0;j<newBuckets[i].size();j++){
+	    		a[aIndex]=newBuckets[i].get(j);
+	    		aIndex++;
+	    	}
+	    }
+	    
+	   /* 
+	    int[] indexs = new int[a.length];    	
+    	Arrays.fill(indexs, 0);
 
         for (int i=0; i<a.length; i++){
         	int pos = (int)Math.floor(((double)a[i]/maxVal)*a.length);
-            buckets[pos].add(a[i]);
+            buckets[pos][indexs[pos]] = a[i];
+            indexs[pos]++;
         }
         
-        for(List<Integer> bucket:buckets){
-        	Collections.sort(bucket);
+        for(int[] bucket:buckets){
+        	Arrays.sort(bucket);
         }
         
-        for(int i=1;i<a.length;i++){
-        	buckets[0].addAll(buckets[i]);
-        }
-        
-        return buckets[0].toArray();
-        
+	    int current =0;
+	    for (int i = 0; i < buckets.length; i++)
+	    {
+	    	for(int j=0;j<indexs[i];j++){
+	    		a[current]=buckets[i][j];
+	    		current++;
+	    	}
+	    }        
+        */
     }
 
 
@@ -44,14 +68,14 @@ public class BucketSort {
     
     public static void main(String[] args){
         int i;
-    	int maxVal=100;
-        int[] arr = new int[10];
+    	int maxVal=1000000;
+        int[] arr = new int[10000];
         for(i=0;i<arr.length;i++){
-            arr[i] = (int)(Math.random() * 100);
+            arr[i] = (int)(Math.random() * maxVal);
         }
-        Object[] result = sort(arr,maxVal);
+        sort(arr,maxVal);
 
-        System.out.println(Arrays.toString(result));
+        System.out.println(Arrays.toString(arr));
 
     }
    
