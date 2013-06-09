@@ -6,18 +6,25 @@ public class CountingSort{
 
 	
 	
-	public static void sort(int[] a, int high) 
+	public int sort(int[] a, int high) 
 	{
+		int ins = 0;
 	    int[] counts = new int[high + 1]; // this will hold all possible values, from low to high
+	    ins++;
+	    
 	    for (int x : a)
 	        counts[x]++; // - low so the lowest possible value is always 0
-	 
+	    ins=ins+a.length;
+	    
 	    int current = 0;
+	    ins++;
 	    for (int i = 0; i < counts.length; i++)
 	    {
 	        Arrays.fill(a, current, current + counts[i], i); // fills counts[i] elements of value i + low in current
 	        current += counts[i]; // leap forward by counts[i] steps
+	        ins++;
 	    }
+	    return ins;
 	}
 	/*
     public static void main(String[] args){
