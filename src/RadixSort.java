@@ -36,7 +36,7 @@ public class RadixSort{
 	    	if(pos>9)
 	    		pos=10*pos/decPos;
 	    	ins++;
-	        counts[pos].add(x); // - low so the lowest possible value is always 0
+	        counts[pos].add(x); 
 	        ins++;
 	    }
 	    int current =0;
@@ -51,16 +51,5 @@ public class RadixSort{
 	    }
 	    return ins;
 	}
- /*
-    public static void main(String[] args){
-        int i;
-        int[] arr = new int[10000];
-        for(i=0;i<arr.length;i++){
-            arr[i] = 10000000+(int)(Math.random() * 90000000);
-          
-        }
-        sort(arr, 99999999);
-        System.out.println(Arrays.toString(arr));
-    }
-	*/
+
 }

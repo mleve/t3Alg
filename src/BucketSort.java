@@ -6,17 +6,11 @@ import java.util.List;
 
 
 public class BucketSort {
-	/*BucketSort para numeros enteros, y asumiendo que hay infinito espacio disponible*/
 	
     public int sort(int[] a, int maxVal){
 	    int ins=0;
 	    ArrayList<Integer>[] newBuckets = new ArrayList[a.length];
 	    ins++;
-	    /*
-	    for(ArrayList<Integer> bucket :newBuckets){
-	    	bucket = new ArrayList<Integer>();
-	    }
-	    */
 	    for(int i=0;i<a.length;i++){
 	    	newBuckets[i] = new ArrayList<Integer>();
 	    	ins++;
@@ -54,7 +48,7 @@ public class BucketSort {
     		ins=ins+2;
     		for(j=i-1;j>=0 && list.get(j) > temp; j--){
     			list.set(j+1, list.get(j));
-    			ins++;
+    			ins=ins+2;
     		}
     		list.set(j+1, temp);
     		ins++;
@@ -63,19 +57,4 @@ public class BucketSort {
    }
 
 
-/*
-    
-    public static void main(String[] args){
-        int i;
-    	int maxVal=1000000;
-        int[] arr = new int[10000];
-        for(i=0;i<arr.length;i++){
-            arr[i] = (int)(Math.random() * maxVal);
-        }
-        sort(arr,maxVal);
-
-        System.out.println(Arrays.toString(arr));
-
-    }
-  */ 
 }
